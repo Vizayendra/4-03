@@ -1,10 +1,7 @@
-from flask import Flask
-
-app = Flask(__name__)  # Create a new Flask app
-
-@app.route('/')  # Set up the home page ("/" is the root URL)
-def home():
-    return "Hello, World!"  # What the page shows
-
-if __name__ == '__main__':
-    app.run(debug=True)  # Run the app in debug mode
+from flask import flask
+app = Flask(__name__)
+@app.route('/')
+    def index():
+@app.route('/')
+    def index():
+app.run(host='0.0.0.0', port=81)
