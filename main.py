@@ -15,3 +15,6 @@ meetings = [
         'link': 'https://meet.google.com/xyz-abc-def'
     }
 ]
+@app.route('/meetings')
+def view_meetings():
+    return render_template('view_meetings.html', meetings=meetings)
