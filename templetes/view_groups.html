@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Study Groups</title>
+</head>
+<body>
+    <h1>Available Study Groups</h1>
+
+    <ul>
+        {% for group in groups %}
+        <li>
+            <strong>{{ group.name }}</strong> ({{ group.subject }})<br>
+            Location: <a href="{{ group.meeting_link }}" target="_blank">{{ group.meeting_link }}</a><br>
+            Description: {{ group.description }}<br>
+            
+            <!--Join/Leave Button logic here -->
+            {% if "Student" in group.members %}
+                <a href="{{ url_for('leave_group', group_id=loop.index0) }}">Leave Group</a>
+            {% else %}
+                <a href="{{ url_for('join_group', group_id=loop.index0) }}">Join Group</a>
+            {% endif %}
+
+            <hr>
+        </li>
+        {% else %}
+        <li>No groups available yet.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('create_group') }}">Create a New Group</a>
+</body>
+</html>
+
