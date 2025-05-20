@@ -1,0 +1,6 @@
+your_project_folder/
+│
+├── main.py
+└── templates/
+    ├── view_meetings.html
+    └── schedule_meeting.html
