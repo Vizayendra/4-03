@@ -12,8 +12,16 @@ if ($conn->connect_error) {
 }
 
 $user_id = $_SESSION['user_id'];
-$current_password = $_POST['current_password'];
+$old_password = $_POST['old_password'];
 $new_password = $_POST['new_password'];
+$confirm_password = $_POST['confirm_password'];
+
+// Check if new passwords match
+if ($new_password !== $confirm_password) {
+    $_SESSION['message'] = "❌ New passwords do not match.";
+    header("Location: profile.php");
+    exit();
+}
 
 // Get the hashed password from DB
 $stmt = $conn->prepare("SELECT password FROM users WHERE id = ?");
@@ -23,7 +31,7 @@ $stmt->bind_result($hashed_password_from_db);
 $stmt->fetch();
 $stmt->close();
 
-if (!password_verify($current_password, $hashed_password_from_db)) {
+if (!password_verify($old_password, $hashed_password_from_db)) {
     $_SESSION['message'] = "❌ Current password is incorrect.";
     header("Location: profile.php");
     exit();
@@ -46,3 +54,4 @@ $conn->close();
 
 header("Location: profile.php");
 exit();
+?>
